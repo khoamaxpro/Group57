@@ -13,10 +13,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(tinhHinh == 1)
+        {
+            tinhHinh = 0;
+            startActivity(new Intent(MainActivity.this, HighScore.class));
+        }
+
+        if(tinhHinh_2 == 1)
+        {
+            tinhHinh_2 = 0;
+            startActivity(new Intent(MainActivity.this, GamePlay.class));
+        }
         anhXa();
         nhapNut();
 
     }
+
 
     private Button btnNewGame;
 
@@ -24,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnAbout;
 
+    static private int tinhHinh = 1;
+
+    static private int tinhHinh_2 = 1;
     private void anhXa()
     {
         btnNewGame = (Button)findViewById(R.id.btnNewGame);
@@ -33,30 +48,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void nhapNut()
     {
-        btnNewGame.setOnTouchListener(new View.OnTouchListener() {
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
+                HighScore.getHighScore().resetDiem();
                 startActivity(new Intent(MainActivity.this, NewGame.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 
-        btnHighScore.setOnTouchListener(new View.OnTouchListener() {
+        btnHighScore.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, HighScore.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 
-        btnAbout.setOnTouchListener(new View.OnTouchListener() {
+        btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, About.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
     }

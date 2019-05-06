@@ -10,7 +10,7 @@
         android:gravity="center"
         android:layout_margin="3dp"
         android:id="@+id/txvOVuong"
-        android:background="#ffffff"
+        android:background="@drawable/ic_goctron4"
         android:scaleType="fitXY"
         />
 </RelativeLayout>

@@ -38,43 +38,43 @@ public class Menu extends AppCompatActivity {
 
     private void nhanNut()
     {
-        btnResume.setOnTouchListener(new View.OnTouchListener() {
+        btnResume.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
-                overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
+                overridePendingTransition(R.anim.anim_enter_reverse,R.anim.anim_exit_reverse);
             }
         });
 
-        btnNewGame.setOnTouchListener(new View.OnTouchListener() {
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
+
+                HighScore.getHighScore().ketThuc();
+                HighScore.getHighScore().resetDiem();
+                GamePlay.getMyGamePlay().Luu();
                 DataGame.getDatagame().restart();
                 Intent intent = new Intent(Menu.this, NewGame.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 
-        btnHighScore.setOnTouchListener(new View.OnTouchListener() {
+        btnHighScore.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(Menu.this, HighScore.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 
-        btnAbout.setOnTouchListener(new View.OnTouchListener() {
+        btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(Menu.this, About.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 

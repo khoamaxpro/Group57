@@ -60,7 +60,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:id="@+id/myDiem"
+                            android:id="@+id/myDiemMulti"
                             android:text="0"
                             android:textColor="#FFF"
                             android:textSize="20sp"
@@ -84,7 +84,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="Friend's Score"
+                            android:text="Friend "
                             android:gravity="center"
                             android:textSize="20sp"
                             android:textColor="#FFF"/>
@@ -106,7 +106,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="match_parent">
@@ -115,14 +115,14 @@
                     android:textColor="#FFF"
                     android:background="@drawable/ic_goctron3"
                     android:text="Undo"
-                    android:id="@+id/btnUnDo"
+                    android:id="@+id/btnUnDoMulti"
                     android:layout_width="85dp"
                     android:layout_height="50dp"
                     ></Button>
                 <Button
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:id="@+id/btnMenu"
+                    android:id="@+id/btnMenuMulti"
                     android:textColor="#FFF"
                     android:background="@drawable/ic_goctron3"
                     android:text="Menu"
@@ -144,10 +144,10 @@
         android:padding="10dp">
 
         <GridView
-            android:id="@+id/gdvGamePlay"
+            android:id="@+id/gdvGamePlayMulti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#DBD17C"
+            android:background="@drawable/ic_goctron5"
             android:numColumns="4">
 
         </GridView>

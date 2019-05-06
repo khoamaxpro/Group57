@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -16,8 +18,6 @@ public class O_So_Adapter extends ArrayAdapter<Integer> {
     private Context ct;
     private ArrayList<Integer> arr;
     private ArrayList<Integer> loai;
-
-
 
     public O_So_Adapter(@NonNull Context context, int resource, @NonNull List<Integer> objects) {
         super(context, resource, objects);
@@ -38,12 +38,20 @@ public class O_So_Adapter extends ArrayAdapter<Integer> {
         if(arr.size() > 0)
         {
             O_Vuong o = (O_Vuong)convertView.findViewById(R.id.txvOVuong);
-            o.setHinh(arr.get(position), loai.get(position));
+            o.setHinh(arr.get(position));
+            if(loai.get(position) == 1)
+            {
+                Animation animation = AnimationUtils.loadAnimation(ct,R.anim.anim_scale);
+                convertView.startAnimation(animation);
+            }
+            else if(loai.get(position) == 2)
+            {
+                Animation animation = AnimationUtils.loadAnimation(ct,R.anim.anim_scale_appear);
+                convertView.startAnimation(animation);
+            }
         }
         return convertView;
     }
-
-
     @Override
     public void notifyDataSetChanged() {
         arr = DataGame.getDatagame().getArrSo();
@@ -51,4 +59,3 @@ public class O_So_Adapter extends ArrayAdapter<Integer> {
         super.notifyDataSetChanged();
     }
 }
-

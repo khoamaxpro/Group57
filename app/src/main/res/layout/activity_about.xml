@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background3"
     tools:context=".About">
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +19,37 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:textStyle="bold"
-                android:text="Flower Pots chơi trên một lưới ô vuông 4x4. Mỗi lần di chuyển là một lượt, người chơi di chuyển các ô vuông bằng cách lướt theo 1 trong 4 hướng ( trái, phải,lên, xuống). Mỗi lượt sẽ có một chậu đất xuất hiện ngẫu nhiên trong một ô trống trên lưới. Khi di chuyển hai chậu giống nhau chúng sẽ kết hợp và tạo thành một chậu mới. Đây là hệ thống theo thứ tự các chậu từ thấp đến cao."/>
+                android:text="Flower Pots chơi trên một lưới ô vuông 4x4 . Mỗi lần di chuyển là một lượt, người chơi di chuyển theo 1 trong 4 hướng (trái, phải, lên, xuống). Mỗi một lượt di chuyển sẽ xuất hiện ngẫu nhiên một chậu đất hoặc chậu đồng trong các ô trống còn lại. Khi di chuyển các hai chậu giống nhau chúng sẽ kết hợp và tạo thành một chậu mới."/>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_height="160dp"
+                android:background="@drawable/gopchau1"/>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_gravity="center"
+                android:layout_height="160dp"
+                android:background="@drawable/gopchau2"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:fontFamily="casual"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:text="Khi tất cả các ô trống được lắp đầy và các ô không thể di chuyển để gộp được nữa thì trò chơi sẽ kết thúc. "/>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_gravity="center"
+                android:layout_height="160dp"
+                android:background="@drawable/gameover"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:text="Dưới đây là hệ thống chậu từ thấp đến cao."/>
             <ImageView
                 android:layout_width="130dp"
                 android:layout_gravity="center"

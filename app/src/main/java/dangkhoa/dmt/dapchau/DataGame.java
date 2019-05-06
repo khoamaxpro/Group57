@@ -7,6 +7,14 @@ import java.util.Random;
 
 public class DataGame{
 
+    private static DataGame datagame;
+    static {
+        datagame = new DataGame();
+    }
+    public static DataGame getDatagame(){
+        return datagame;
+    }
+
     int[][] mangHaiChieu = new int[4][4];
     int[][] _loai = new int[4][4];
 
@@ -16,12 +24,23 @@ public class DataGame{
     private ArrayList<Integer> arrSo_2 = new ArrayList<>();
     private ArrayList<Integer> Loai_2 = new ArrayList<>();
 
+    private ArrayList<Integer> diemDuoi = new ArrayList<>();
+
     public ArrayList<Integer> getArrSo() {
         return arrSo;
     }
     public ArrayList<Integer> getLoai()
     {
         return Loai;
+    }
+
+    public void setLoai(ArrayList<Integer> a)
+    {
+        Loai.clear();
+        for(int i = 0;i < 16;i++)
+        {
+            Loai.add(a.get(i));
+        }
     }
 
     public void setArrSo(ArrayList<Integer> a) {
@@ -41,13 +60,7 @@ public class DataGame{
     private int diem_2 = 0;
     private int diemBest = 0;
     private int diemBest_2 = 0;
-    private static DataGame datagame;
-    static {
-        datagame = new DataGame();
-    }
-    public static DataGame getDatagame(){
-        return datagame;
-    }
+
 
     private Random r = new Random();
 
@@ -117,6 +130,7 @@ public class DataGame{
 
         if(so_0_Tao != 0)
         {
+            HighScore.getHighScore().congDiem();
             congDiem();
             if(diem > diemBest)
             {
@@ -161,7 +175,7 @@ public class DataGame{
     {
         arrSo.clear();
         Loai.clear();
-        diem = -20;
+        diem = -10;
         diem_2 = 0;
         for(int i = 0;i < 4;i++)
         {
@@ -173,7 +187,6 @@ public class DataGame{
                 Loai.add(0);
             }
         }
-        taoSo();
         chuyenDoi();
     }
 
@@ -198,6 +211,7 @@ public class DataGame{
     // Vuốt trái
     public void vuotTrai()
     {
+        xoaLoai();
         for(int i = 0;i < 4;i++)
         {
             for(int j = 0;j < 4;j++)
@@ -254,7 +268,14 @@ public class DataGame{
                         else
                         {
                             mangHaiChieu[i][j] = so_2;
-                            _loai[i][j] = loai_2;
+                            if(loai_2 == 1)
+                            {
+                                _loai[i][j] = loai_2;
+                            }
+                            else
+                            {
+                                _loai[i][j] = 0;
+                            }
                             mangHaiChieu[i][k] = 0;
                             _loai[i][k] = 0;
                             break;
@@ -270,6 +291,7 @@ public class DataGame{
     // Vuốt phải
     public void vuotPhai()
     {
+        xoaLoai();
         for(int i = 0;i < 4;i++)
         {
             for(int j = 3;j >= 0;j--)
@@ -327,7 +349,14 @@ public class DataGame{
                         else
                         {
                             mangHaiChieu[i][j] = so_2;
-                            _loai[i][j] = loai_2;
+                            if(loai_2 == 1)
+                            {
+                                _loai[i][j] = loai_2;
+                            }
+                            else
+                            {
+                                _loai[i][j] = 0;
+                            }
                             mangHaiChieu[i][k] = 0;
                             _loai[i][k] = 0;
                             break;
@@ -343,6 +372,7 @@ public class DataGame{
     // Vuốt lên
     public void vuotLen()
     {
+        xoaLoai();
         for(int j = 0;j < 4;j++)
         {
             for(int i = 0;i < 4;i++)
@@ -400,7 +430,14 @@ public class DataGame{
                         else
                         {
                             mangHaiChieu[i][j] = so_2;
-                            _loai[i][j] = loai_2;
+                            if(loai_2 == 1)
+                            {
+                                _loai[i][j] = loai_2;
+                            }
+                            else
+                            {
+                                _loai[i][j] = 0;
+                            }
                             mangHaiChieu[k][j] = 0;
                             _loai[k][j] = 0;
                             break;
@@ -415,6 +452,7 @@ public class DataGame{
 
     // Vuốt xuống
     public void vuotXuong() {
+        xoaLoai();
         for (int j = 0; j < 4; j++) {
             for (int i = 3; i >= 0; i--) {
                 int so = mangHaiChieu[i][j];
@@ -454,7 +492,14 @@ public class DataGame{
                             continue;
                         } else {
                             mangHaiChieu[i][j] = so_2;
-                            _loai[i][j] = loai_2;
+                            if(loai_2 == 1)
+                            {
+                                _loai[i][j] = loai_2;
+                            }
+                            else
+                            {
+                                _loai[i][j] = 0;
+                            }
                             mangHaiChieu[k][j] = 0;
                             _loai[k][j] = 0;
                             break;
@@ -527,8 +572,16 @@ public class DataGame{
         }
         return 0;
     }
+
+    public void xoaLoai()
+    {
+        for(int i = 0;i < 4;i++)
+        {
+            for(int j = 0;j < 4;j++)
+            {
+                _loai[i][j] = 0;
+                Loai.set(4*i+j, 0);
+            }
+        }
+    }
 }
-
-
-
-

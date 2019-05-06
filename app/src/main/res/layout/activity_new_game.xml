@@ -31,7 +31,7 @@
                 android:id="@+id/btnSinglePlay"
                 android:textColor="#FFF"
                 android:text="Single Play"
-                android:background="#00BCD4"
+                android:background="@drawable/ic_goctron3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
@@ -39,7 +39,7 @@
                 android:textColor="#FFF"
                 android:layout_marginTop="20dp"
                 android:text="Play With Friend"
-                android:background="#00BCD4"
+                android:background="@drawable/ic_goctron3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

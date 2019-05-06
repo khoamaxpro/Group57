@@ -106,7 +106,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="match_parent">
@@ -147,7 +147,7 @@
             android:id="@+id/gdvGamePlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#D8D149"
+            android:background="@drawable/ic_goctron5"
             android:numColumns="4">
 
         </GridView>

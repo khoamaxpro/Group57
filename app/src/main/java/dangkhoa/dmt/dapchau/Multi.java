@@ -26,14 +26,13 @@ public class Multi extends AppCompatActivity {
         myMulti = this;
 
         anhXa();
+
         khoiTao();
         setData();
 
     }
 
-    private SharedPreferences luuDiemSo;
 
-    private ArrayList<Integer> arrayList;
 
     private static Multi myMulti;
 
@@ -54,17 +53,13 @@ public class Multi extends AppCompatActivity {
 
     private TextView myDiem;
 
-    private TextView myFriendScore;
-
     private double x0, y0, x, y;
 
     private void anhXa(){
-        luuDiemSo = getSharedPreferences("DiemSoGame", MODE_PRIVATE);
-        gdvGamePlay = (GridView)findViewById(R.id.gdvGamePlay);
-        myDiem = (TextView)findViewById(R.id.myDiem);
-        myFriendScore = (TextView)findViewById(R.id.myFriendScore);
-        btnMenu = (Button)findViewById(R.id.btnMenu);
-        btnUndo = (Button)findViewById(R.id.btnUnDo);
+        gdvGamePlay = (GridView)findViewById(R.id.gdvGamePlayMulti);
+        myDiem = (TextView)findViewById(R.id.myDiemMulti);
+        btnMenu = (Button)findViewById(R.id.btnMenuMulti);
+        btnUndo = (Button)findViewById(R.id.btnUnDoMulti);
         animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         animScale_appear = AnimationUtils.loadAnimation(this, R.anim.anim_scale_appear);
     }
@@ -111,20 +106,21 @@ public class Multi extends AppCompatActivity {
             }
         });
 
-        btnMenu.setOnTouchListener(new View.OnTouchListener() {
+        btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(Multi.this, Menu.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 
-        btnUndo.setOnTouchListener(new View.OnTouchListener() {
+        btnUndo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                setMyUnDo();
-                return true;
+            public void onClick(View v) {
+                if(DataGame.getDatagame().getDiem() != 0) {
+                    HighScore.getHighScore().quayLaiDiem();
+                    setMyUnDo();
+                }
             }
         });
     }
@@ -133,14 +129,9 @@ public class Multi extends AppCompatActivity {
         gdvGamePlay.setAdapter(adapter);
     }
 
-    public void phongTo(ImageView img)
+    public void phongTo(int a)
     {
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animScale);
-            }
-        });
+        Toast.makeText(Multi.this,"" + a, Toast.LENGTH_SHORT).show();
     }
 
     public void xuatHien(ImageView img)
@@ -161,5 +152,4 @@ public class Multi extends AppCompatActivity {
         myDiem.setText(""+DataGame.getDatagame().getDiem());
         setData();
     }
-
 }

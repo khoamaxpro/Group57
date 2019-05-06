@@ -23,21 +23,28 @@ public class GamePlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
+        if(tinhHinh == 1)
+        {
+            tinhHinh = 0;
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+
         myGamePlay = this;
 
         anhXa();
         DataGame.getDatagame().setDiemBest(luuDiemSo.getInt("DiemBest", 0));
         myDiemBest.setText(""+DataGame.getDatagame().getDiemBest());
-        HighScore.getHighScore().setDiem(DataGame.getDatagame().getDiemBest());
 
         khoiTao();
         setData();
 
     }
 
+    static private int tinhHinh = 1;
     private SharedPreferences luuDiemSo;
 
-    private ArrayList<Integer> arrayList;
 
     private static GamePlay myGamePlay;
 
@@ -106,7 +113,6 @@ public class GamePlay extends AppCompatActivity {
                         }
                         myDiem.setText(""+DataGame.getDatagame().getDiem());
                         myDiemBest.setText(""+DataGame.getDatagame().getDiemBest());
-                        Luu();
                         if(DataGame.getDatagame().kiemTra() == 0)
                         {
                             Toast.makeText(GamePlay.this, "GAME OVER", Toast.LENGTH_LONG).show();
@@ -117,20 +123,21 @@ public class GamePlay extends AppCompatActivity {
             }
         });
 
-        btnMenu.setOnTouchListener(new View.OnTouchListener() {
+        btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(GamePlay.this, Menu.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
 
-        btnUndo.setOnTouchListener(new View.OnTouchListener() {
+        btnUndo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                setMyUnDo();
-                return true;
+            public void onClick(View v) {
+                if(DataGame.getDatagame().getDiem() != 0) {
+                    HighScore.getHighScore().quayLaiDiem();
+                    setMyUnDo();
+                }
             }
         });
     }
@@ -139,14 +146,9 @@ public class GamePlay extends AppCompatActivity {
         gdvGamePlay.setAdapter(adapter);
     }
 
-    public void phongTo(ImageView img)
+    public void phongTo(int a)
     {
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animScale);
-            }
-        });
+        Toast.makeText(GamePlay.this,"" + a, Toast.LENGTH_SHORT).show();
     }
 
     public void xuatHien(ImageView img)
@@ -175,4 +177,5 @@ public class GamePlay extends AppCompatActivity {
         editor.putInt("DiemBest", DataGame.getDatagame().getDiemBest());
         editor.commit();
     }
+
 }

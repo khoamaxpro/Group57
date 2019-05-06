@@ -38,7 +38,7 @@ public class O_Vuong extends ImageView {
 
     }
 
-    public void setHinh(int so,int loai)
+    public void setHinh(int so)
     {
         arrayHinh = new ArrayList<>();
         arrayHinh.add(R.drawable.a);

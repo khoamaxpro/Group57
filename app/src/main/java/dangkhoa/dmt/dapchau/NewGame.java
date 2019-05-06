@@ -29,21 +29,18 @@ public class NewGame extends AppCompatActivity {
 
     private void nhanNut()
     {
-        btnSingle.setOnTouchListener(new View.OnTouchListener() {
+        btnSingle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(NewGame.this, GamePlay.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
-
-        btnMulti.setOnTouchListener(new View.OnTouchListener() {
+        btnMulti.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 startActivity(new Intent(NewGame.this, Multi.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
-                return true;
             }
         });
     }

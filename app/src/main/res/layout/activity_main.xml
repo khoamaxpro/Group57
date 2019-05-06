@@ -33,7 +33,7 @@
             <Button
                 android:id="@+id/btnNewGame"
                 android:textColor="#FFF"
-                android:background="#00BCD4"
+                android:background="@drawable/ic_goctron3"
                 android:text="New Game"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -42,7 +42,7 @@
                 android:id="@+id/btnHighScore"
                 android:textColor="#FFF"
                 android:layout_marginTop="20dp"
-                android:background="#00BCD4"
+                android:background="@drawable/ic_goctron3"
                 android:text="High Score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -51,7 +51,7 @@
                 android:id="@+id/btnAbout"
                 android:textColor="#FFF"
                 android:layout_marginTop="20dp"
-                android:background="#00BCD4"
+                android:background="@drawable/ic_goctron3"
                 android:text="About"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
