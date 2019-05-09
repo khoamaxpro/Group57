@@ -13,11 +13,20 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.github.nkzawa.socketio.client.IO;
+import java.net.URISyntaxException;
+import com.github.nkzawa.socketio.client.Socket;
 
 import java.util.ArrayList;
 
 public class Multi extends AppCompatActivity {
 
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://192.168.56.1:3000");
+        } catch (URISyntaxException e) {}
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +35,12 @@ public class Multi extends AppCompatActivity {
         myMulti = this;
 
         anhXa();
-
+        mSocket.connect();
         khoiTao();
         setData();
 
     }
+
 
 
 
@@ -98,6 +108,7 @@ public class Multi extends AppCompatActivity {
                         myDiem.setText(""+DataGame.getDatagame().getDiem());
                         if(DataGame.getDatagame().kiemTra() == 0)
                         {
+                            DataGame.getDatagame().dongBo();
                             Toast.makeText(Multi.this, "GAME OVER", Toast.LENGTH_LONG).show();
                         }
                         break;

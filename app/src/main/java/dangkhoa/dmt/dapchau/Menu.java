@@ -52,10 +52,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                HighScore.getHighScore().ketThuc();
-                HighScore.getHighScore().resetDiem();
-                GamePlay.getMyGamePlay().Luu();
-                DataGame.getDatagame().restart();
+
                 Intent intent = new Intent(Menu.this, NewGame.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);

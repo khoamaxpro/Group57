@@ -56,7 +56,7 @@ public class DataGame{
         }
     }
 
-    private int diem = -10;
+    private int diem = -20;
     private int diem_2 = 0;
     private int diemBest = 0;
     private int diemBest_2 = 0;
@@ -104,11 +104,14 @@ public class DataGame{
     public void taoSo()
     {
         int so_0 = 0;
-        for(int i = 0;i < 16;i++)
+        for(int i = 0;i < 4;i++)
         {
-            if(arrSo.get(i) == 0)
+            for(int j = 0;j < 4;j++)
             {
-                so_0++;
+                if(mangHaiChieu[i][j] == 0)
+                {
+                    so_0++;
+                }
             }
         }
         int so_0_Tao;
@@ -132,6 +135,13 @@ public class DataGame{
         {
             HighScore.getHighScore().congDiem();
             congDiem();
+            arrSo_2.clear();
+            Loai_2.clear();
+            for(int i = 0;i < 16;i++)
+            {
+                arrSo_2.add(arrSo.get(i));
+                Loai_2.add(Loai.get(i));
+            }
             if(diem > diemBest)
             {
                 diemBest_2 = diemBest;
@@ -153,13 +163,6 @@ public class DataGame{
     }
     public void chuyenDoi()
     {
-        arrSo_2.clear();
-        Loai_2.clear();
-        for(int i = 0;i < 16;i++)
-        {
-            arrSo_2.add(arrSo.get(i));
-            Loai_2.add(Loai.get(i));
-        }
         arrSo.clear();
         Loai.clear();
         for(int i = 0;i < 4;i++)
@@ -208,6 +211,21 @@ public class DataGame{
         }
     }
 
+    public void dongBo()
+    {
+        diem_2 = diem;
+        diemBest_2 = diemBest;
+        arrSo_2.clear();
+        Loai_2.clear();
+        for(int i = 0;i < 4;i++)
+        {
+            for(int j = 0;j < 4;j++)
+            {
+                arrSo_2.add(arrSo.get(i*4 + j));
+                Loai_2.add(0);
+            }
+        }
+    }
     // Vuốt trái
     public void vuotTrai()
     {
@@ -573,6 +591,20 @@ public class DataGame{
         return 0;
     }
 
+    public int phaDao()
+    {
+        for(int i = 0;i < 4;i++)
+        {
+            for(int j = 0;j < 4;j++)
+            {
+                if(mangHaiChieu[i][j] == 65536)
+                {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
     public void xoaLoai()
     {
         for(int i = 0;i < 4;i++)

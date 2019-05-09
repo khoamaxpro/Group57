@@ -23,6 +23,12 @@ public class GamePlay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
+        myGamePlay = this;
+
+        anhXa();
+        DataGame.getDatagame().setDiemBest(luuDiemSo.getInt("DiemBest", 0));
+        myDiemBest.setText(""+DataGame.getDatagame().getDiemBest());
+
         if(tinhHinh == 1)
         {
             tinhHinh = 0;
@@ -31,18 +37,12 @@ public class GamePlay extends AppCompatActivity {
             finish();
         }
 
-        myGamePlay = this;
-
-        anhXa();
-        DataGame.getDatagame().setDiemBest(luuDiemSo.getInt("DiemBest", 0));
-        myDiemBest.setText(""+DataGame.getDatagame().getDiemBest());
-
         khoiTao();
         setData();
 
     }
 
-    static private int tinhHinh = 1;
+    private static int tinhHinh = 1;
     private SharedPreferences luuDiemSo;
 
 
@@ -53,7 +53,6 @@ public class GamePlay extends AppCompatActivity {
         return myGamePlay;
     }
 
-    private Animation animScale, animScale_appear;
 
     private GridView gdvGamePlay;
 
@@ -76,8 +75,6 @@ public class GamePlay extends AppCompatActivity {
         myDiemBest = (TextView)findViewById(R.id.myBestDiem);
         btnMenu = (Button)findViewById(R.id.btnMenu);
         btnUndo = (Button)findViewById(R.id.btnUnDo);
-        animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
-        animScale_appear = AnimationUtils.loadAnimation(this, R.anim.anim_scale_appear);
     }
 
     private void khoiTao(){
@@ -86,38 +83,55 @@ public class GamePlay extends AppCompatActivity {
         gdvGamePlay.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        x0 = event.getX();
-                        y0 = event.getY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        x = event.getX();
-                        y = event.getY();
-                        if (Math.abs(x - x0) > Math.abs(y - y0)) {
-                            if (x > x0) {                                     // Vuốt phải
-                                DataGame.getDatagame().vuotPhai();
-                                adapter.notifyDataSetChanged();
-                            } else if(x < x0){                                //Vuốt trái
-                                DataGame.getDatagame().vuotTrai();
-                                adapter.notifyDataSetChanged();
+                if (tinhHinh == 0) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            x0 = event.getX();
+                            y0 = event.getY();
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            x = event.getX();
+                            y = event.getY();
+                            if (Math.abs(x - x0) > Math.abs(y - y0)) {
+                                if (x > x0) {                                     // Vuốt phải
+                                    DataGame.getDatagame().vuotPhai();
+                                    adapter.notifyDataSetChanged();
+                                } else if (x < x0) {                                //Vuốt trái
+                                    DataGame.getDatagame().vuotTrai();
+                                    adapter.notifyDataSetChanged();
+                                }
+                            } else if (Math.abs(x - x0) < Math.abs(y - y0)) {
+                                if (y > y0) {                            // Vuốt xuống
+                                    DataGame.getDatagame().vuotXuong();
+                                    adapter.notifyDataSetChanged();
+                                } else if (y < y0) {                                 // Vuốt lên
+                                    DataGame.getDatagame().vuotLen();
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
-                        } else if(Math.abs(x - x0) < Math.abs(y - y0)){
-                            if (y > y0) {                            // Vuốt xuống
-                                DataGame.getDatagame().vuotXuong();
-                                adapter.notifyDataSetChanged();
-                            } else if(y < y0) {                                 // Vuốt lên
-                                DataGame.getDatagame().vuotLen();
-                                adapter.notifyDataSetChanged();
+                            myDiem.setText("" + DataGame.getDatagame().getDiem());
+                            myDiemBest.setText("" + DataGame.getDatagame().getDiemBest());
+                            if (DataGame.getDatagame().kiemTra() == 0) {
+                                tinhHinh = 2;
+                                DataGame.getDatagame().dongBo();
+                                Toast.makeText(GamePlay.this, "GAME OVER", Toast.LENGTH_LONG).show();
                             }
-                        }
-                        myDiem.setText(""+DataGame.getDatagame().getDiem());
-                        myDiemBest.setText(""+DataGame.getDatagame().getDiemBest());
-                        if(DataGame.getDatagame().kiemTra() == 0)
-                        {
-                            Toast.makeText(GamePlay.this, "GAME OVER", Toast.LENGTH_LONG).show();
-                        }
-                        break;
+                            if (DataGame.getDatagame().phaDao() == 1) {
+                                tinhHinh = 2;
+                                DataGame.getDatagame().dongBo();
+                                Toast.makeText(GamePlay.this, "YOU WIN", Toast.LENGTH_LONG).show();
+                            }
+                            break;
+                    }
+                }
+                else if(tinhHinh == 2)
+                {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            startActivity(new Intent(GamePlay.this, NhapTen.class));
+                            overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit);
+                            break;
+                    }
                 }
                 return true;
             }
@@ -144,23 +158,8 @@ public class GamePlay extends AppCompatActivity {
 
     public void setData(){
         gdvGamePlay.setAdapter(adapter);
-    }
 
-    public void phongTo(int a)
-    {
-        Toast.makeText(GamePlay.this,"" + a, Toast.LENGTH_SHORT).show();
     }
-
-    public void xuatHien(ImageView img)
-    {
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animScale_appear);
-            }
-        });
-    }
-
 
     public void setMyUnDo()
     {
@@ -178,4 +177,15 @@ public class GamePlay extends AppCompatActivity {
         editor.commit();
     }
 
+    public void xoaLuu()
+    {
+        SharedPreferences.Editor editor = luuDiemSo.edit();
+        editor.putInt("DiemBest", 0);
+        editor.commit();
+    }
+
+    public void resetTinhHinh()
+    {
+        tinhHinh = 0;
+    }
 }

@@ -32,13 +32,16 @@ public class NewGame extends AppCompatActivity {
         btnSingle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NewGame.this, GamePlay.class));
+
+                startActivity(new Intent(NewGame.this, SingleOption.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
             }
         });
         btnMulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HighScore.getHighScore().resetDiem();
+                DataGame.getDatagame().restart();
                 startActivity(new Intent(NewGame.this, Multi.class));
                 overridePendingTransition(R.anim.anim_enter,R.anim.anim_exit);
             }
